@@ -196,6 +196,9 @@ TW_HAS_EDL_MODE := true
 TW_Y_OFFSET := 48
 TW_H_OFFSET := -48
 
+# Battery
+TW_USE_LEGACY_BATTERY_SERVICES := true
+
 # Debug flags
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
