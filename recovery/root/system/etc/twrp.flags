@@ -3,7 +3,7 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 # mount point    fstype     device                 device2                        flags
-/boot            emmc       /dev/block/bootdevice/by-name/boot                    flags=slotselect;backup=1;flashimg=1
+/boot            emmc       /dev/block/bootdevice/by-name/boot                    flags=slotselect;backup=1;display="Boot";flashimg=1
 /vendor_boot     emmc       /dev/block/bootdevice/by-name/vendor_boot                    flags=slotselect;backup=1;display="Vendor Boot";flashimg=1
 /dtbo            emmc       /dev/block/bootdevice/by-name/dtbo                    flags=backup=1;display="DTBO";slotselect;flashimg=1
 /vbmeta          emmc       /dev/block/bootdevice/by-name/vbmeta                  flags=backup=1;display="VBMeta";slotselect;flashimg=1
