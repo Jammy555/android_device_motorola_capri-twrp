@@ -17,7 +17,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/twrp_caprip.mk
+     $(LOCAL_DIR)/omni_caprip.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_caprip-userdebug
+    omni_caprip-userdebug

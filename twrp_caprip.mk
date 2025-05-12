@@ -33,7 +33,7 @@ PRODUCT_RELEASE_NAME := caprip
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := caprip
-PRODUCT_NAME := twrp_caprip
+PRODUCT_NAME := omni_caprip
 PRODUCT_BRAND := motorola
 PRODUCT_MODEL := moto g(30)
 PRODUCT_MANUFACTURER := motorola
