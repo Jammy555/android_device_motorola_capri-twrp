@@ -213,10 +213,7 @@ TARGET_COPY_OUT_PRODUCT := product
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Kernel module loading
-TW_LOAD_VENDOR_MODULES := "exfat.ko \
-            nova_0flash_mmi.ko \
-            ili9882_mmi.ko \
-            mmi_annotate.ko \
+TW_LOAD_VENDOR_MODULES := "mmi_annotate.ko \
             mmi_info.ko \
             mmi_sys_temp.ko \
             moto_f_usbnet.ko \
@@ -224,6 +221,10 @@ TW_LOAD_VENDOR_MODULES := "exfat.ko \
             qpnp-power-on-mmi.ko \
             sensors_class.ko \
             utags.ko"
+
+# Kernel Modules - Vendor Boot
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/vendor_boot.modules.load))
+BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD)
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
