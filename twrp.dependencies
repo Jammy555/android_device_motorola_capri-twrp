@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- Kernel -->
+  <project name="motorola/capri-kernel" path="kernel/motorola/capri" remote="github" revision="android-12.1" />
+  
+  <!-- Vendor -->
+  <project name="motorola/capri-vendor" path="vendor/motorola/capri" remote="github" revision="android-12.1" />
+  
+  <!-- Device Common -->
+  <project name="motorola/capri-common" path="device/motorola/capri-common" remote="github" revision="android-12.1" />
+  
+  <!-- Hardware -->
+  <project name="motorola/capri-hardware" path="hardware/motorola/capri" remote="github" revision="android-12.1" />
+  
+  <!-- Device Tree -->
+  <project name="Jammy555/android_device_motorola_capri" path="device/motorola/capri" remote="github" revision="twrp" />
+</manifest> 

@@ -28,15 +28,16 @@ PRODUCT_PLATFORM := bengal
 # A/B support
 AB_OTA_UPDATER := true
 
-LOCAL_PATH := device/motorola/caprip
+LOCAL_PATH := device/motorola/guamp
 
 # A/B
 AB_OTA_PARTITIONS += \
     boot \
     system \
+    system_ext \
     vendor \
-    vendor_boot \
     product \
+    recovery \
     vbmeta \
     vbmeta_system \
     dtbo
@@ -47,6 +48,11 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier \
     update_engine_sideload
+
+PRODUCT_PACKAGES += \
+    bootctrl.bengal \
+    update_engine_sideload
+
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -69,26 +75,48 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # fastbootd
 PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
     fastbootd
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(LOCAL_PATH) \
+    vendor/qcom/opensource/commonsys-intf/display
 
 # Encryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.allow_encrypt_override=true \
+    ro.crypto.volume.filenames_mode=aes-256-cts \
+    ro.crypto.volume.metadata.method=dm-default-key \
+    ro.crypto.dm_default_key.options_format.version=2 \
+    ro.crypto.volume.options=::v2
+
 # Blacklist
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
     ro.bootimage.build.date.utc \
     ro.build.date.utc
 
+# Touch Firmware
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/root/vendor/firmware/ILITEK_FW_TM_9882N:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/ILITEK_FW_TM_9882N \
+    $(LOCAL_PATH)/recovery/root/vendor/firmware/ILITEK_FW_TXD_7806S:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/ILITEK_FW_TXD_7806S \
+    $(LOCAL_PATH)/recovery/root/vendor/firmware/ILITEK_FW_TXD_9882H:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/ILITEK_FW_TXD_9882H \
+    $(LOCAL_PATH)/recovery/root/vendor/firmware/NT36xxx_MP_Setting_Criteria_601D.csv:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/NT36xxx_MP_Setting_Criteria_601D.csv \
+    $(LOCAL_PATH)/recovery/root/vendor/firmware/NT36xxx_MP_Setting_Criteria_602B.csv:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/NT36xxx_MP_Setting_Criteria_602B.csv \
+    $(LOCAL_PATH)/recovery/root/vendor/firmware/djn_novatek_ts_fw.bin:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/djn_novatek_ts_fw.bin \
+    $(LOCAL_PATH)/recovery/root/vendor/firmware/djn_novatek_ts_mp.bin:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware/djn_novatek_ts_mp.bin \
+
 # Copy modules for depmod
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/exfat.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/exfat.ko \
+    $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/chipone_tddi_mmi.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/chipone_tddi_mmi.ko \
     $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/ili9882_mmi.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/ili9882_mmi.ko \
+    $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/himax_v3_mmi_hx83102d.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/himax_v3_mmi_hx83102d.ko \
+    $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/himax_v3_mmi.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/himax_v3_mmi.ko \
     $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/mmi_annotate.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/mmi_annotate.ko \
     $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/mmi_info.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/mmi_info.ko \
     $(LOCAL_PATH)/recovery/root/vendor/lib/modules/1.1/mmi_sys_temp.ko:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules/1.1/mmi_sys_temp.ko \
